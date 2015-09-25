@@ -1,0 +1,6 @@
+Note left of ProxyServer: Server is Up
+ProxyServer->DiscovServer: "LOOKUP UNIT1 UNIT2"
+Note right of DiscovServer: look up IP and portno \n supporting unit1<->unit2
+DiscovServer-->ProxyServer: "NOT FOUND UNIT1 UNIT2"
+
+

@@ -1,0 +1,8 @@
+Note left of ConvServer: Server is Up
+ConvServer->DiscovServer: "ADD UNIT1 UNIT2 IPADD PORTNO"
+Note right of DiscovServer: Add ConvServer
+DiscovServer-->ConvServer: "ADDED UNIT1 UNIT2 IPADD PORTNO"
+Note left of ConvServer: Server is Down
+ConvServer->DiscovServer: "REMOVE UNIT1 UNIT2 IPADD PORTNO"
+Note right of DiscovServer: Remove ConvServer, write to log
+
