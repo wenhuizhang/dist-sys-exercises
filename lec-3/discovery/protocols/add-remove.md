@@ -22,16 +22,16 @@ A basic datastructure for Add and Remove protocol is listed as below.
 
 ## Add Protocol
 
-Once ConvServer is boot up, it needs to tell DiscovServer that its service `unit1 <-> unit2` is on market.
+- Once ConvServer is boot up, it needs to tell DiscovServer that its service `unit1 <-> unit2` is on market.
 
-And DiscovServer will then help get it registered, so when clients query the information, DiscovServer will return the converting service provider ip and port number. 
+- And DiscovServer will then help get it registered, so when clients query the information, DiscovServer will return the converting service provider ip and port number. 
 
 
 ## Remove Protocol 
 
-When ConvServer is shut down, it needs to tell DiscovServer that its service is down.
+- When ConvServer is shut down, it needs to tell DiscovServer that its service is down.
 
-And DiscovServer will then help get it unregistered, so when clients query the information, DiscovServer will return the `Not Found` information. 
+- And DiscovServer will then help get it unregistered, so when clients query the information, DiscovServer will return the `Not Found` information. 
 
 
 
