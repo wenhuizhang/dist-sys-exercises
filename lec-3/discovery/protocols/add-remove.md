@@ -7,8 +7,8 @@ Describe your protocol here.
 | Add           | ADD UNIT1 UNIT2 IPADD PORTNO          | 
 | Remove        | REMOVE UNIT1 UNIT2 IPADD PORTNO       |  
 
-![Alt text](https://github.com/wenhuizhang/dist-sys-exercises/blob/lec_3_prototype/lec-3/discovery/img/add_remove.svg)
-<img src="https://github.com/wenhuizhang/dist-sys-exercises/blob/lec_3_prototype/lec-3/discovery/img/add_remove.svg">
+![Alt text](https://cdn.rawgit.com/wenhuizhang/dist-sys-exercises/lec_3_prototype/lec-3/discovery/img/add_remove.svg)
+<img src="https://cdn.rawgit.com/wenhuizhang/dist-sys-exercises/lec_3_prototype/lec-3/discovery/img/add_remove.svg">
 
 
 ## Add Protocol
