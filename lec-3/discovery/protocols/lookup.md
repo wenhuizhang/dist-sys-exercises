@@ -3,6 +3,9 @@
 
 Lookup protocol is a commication protocol implemented between ProxyServer and DiscovServer.
 
+
+<img src="https://cdn.rawgit.com/wenhuizhang/dist-sys-exercises/lec_3_prototype/lec-3/discovery/img/arch.png" >
+
 ProxyServer is accepting queries from clients and send them to DiscovServer, where proxy server is acting as a client in view of DiscovServer. DiscovServer is acting as a DNS server, which provides ip and port number lookups for clients, who query a `unit1 <-> unit2` convertion.  
 
 A basic datastructure for Lookup protocol is listed as below. 
