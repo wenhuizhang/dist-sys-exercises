@@ -13,7 +13,7 @@ ConvServer is a server provides converstion services; DiscovServer is acting as 
 A basic datastructure for Add and Remove protocol is listed as below. 
 
 
-| Property      | Protocol                              |                                        |
+| Property      | Protocol: ConvServer Send             | Protocol: ProxyServer Send             |
 | ------------- |:------------------------------------- | :------------------------------------- | 
 | Add           | ADD UNIT1 UNIT2 IPADD PORTNO          |  ADDED UNIT1 UNIT2 IPADD PORTNO        |
 | Remove        | REMOVE UNIT1 UNIT2 IPADD PORTNO       |  REMOVED UNIT1 UNIT2 IPADD PORTNO      |
