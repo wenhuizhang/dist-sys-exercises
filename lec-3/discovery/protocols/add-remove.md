@@ -37,6 +37,6 @@ And DiscovServer will then help get it unregistered, so when clients query the i
 
 ### P.S.
 
-If you are feeling ambitious, have someone make a figure with a tool like this: http://bramp.github.io/js-sequence-diagrams/
+- If you are feeling ambitious, have someone make a figure with a tool like this: http://bramp.github.io/js-sequence-diagrams/
 
-Then use http://rawgit.com/ for svg support. 
+- Then use http://rawgit.com/ for svg support. 
