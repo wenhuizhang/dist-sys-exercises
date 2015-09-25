@@ -25,14 +25,6 @@ A basic datastructure for Lookup protocol is listed as below.
 <img src="https://cdn.rawgit.com/wenhuizhang/dist-sys-exercises/lec_3_prototype/lec-3/discovery/img/lookup_not_found.svg">
 
 
-## Found Case
-
-jk
-
-
-## Not Found Case
-
-
 
 
 ### P.S.
