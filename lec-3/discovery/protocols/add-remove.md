@@ -3,13 +3,9 @@
 
 Add and Remove protocol is a commication implemented between ConvServer and DiscovServer.
 
-ConvServer is a server provides converstion services, DiscovServer is acting as a DNS server, which provides ip and port number lookups for clients, who query a `unit1 <-> unit2` convertion. 
+ConvServer is a server provides converstion services; DiscovServer is acting as a DNS server, which provides ip and port number lookups for clients, who query a `unit1 <-> unit2` convertion. 
 
-Once ConvServer is boot up, it needs to tell DiscovServer that its service `unit1 <-> unit2` is on market.
 
-And DiscovServer will then help get it registered, so when clients query the information, DiscovServer will return the converting service provider ip and port number. 
-
-When ConvServer is shut down, it needs to tell DiscovServer that its service is down. 
 
 <img src="https://cdn.rawgit.com/wenhuizhang/dist-sys-exercises/lec_3_prototype/lec-3/discovery/img/add_remove.svg">
 
@@ -26,12 +22,16 @@ A basic datastructure for Add and Remove protocol is listed as below.
 
 ## Add Protocol
 
-Add 
+Once ConvServer is boot up, it needs to tell DiscovServer that its service `unit1 <-> unit2` is on market.
+
+And DiscovServer will then help get it registered, so when clients query the information, DiscovServer will return the converting service provider ip and port number. 
+
 
 ## Remove Protocol 
 
+When ConvServer is shut down, it needs to tell DiscovServer that its service is down.
 
-
+And DiscovServer will then help get it unregistered, so when clients query the information, DiscovServer will return the `Not Found` information. 
 
 
 
