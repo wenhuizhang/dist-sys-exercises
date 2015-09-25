@@ -7,7 +7,7 @@ Describe your protocol here.
 | Add           | ADD UNIT1 UNIT2 IPADD PORTNO          | 
 | Remove        | REMOVE UNIT1 UNIT2 IPADD PORTNO       |  
 
-
+![svg add remove](https://github.com/wenhuizhang/dist-sys-exercises/blob/lec_3_prototype/lec-3/discovery/img/add_remove.svg)
 
 ## Add Protocol
 
