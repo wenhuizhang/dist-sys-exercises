@@ -2,6 +2,13 @@
 Describe your protocol here.
 
 
+| Property      | Value                                     | 
+| ------------- |:-----------------------------------------:| 
+| Add           | ADD UNIT1 UNIT2 IPADD PORTNO FLAG         | 
+| Remove        | REMOVE UNIT1 UNIT2 IPADD PORTNO FLAG      |  
+
+
+
 ## Add Protocol
 
 
