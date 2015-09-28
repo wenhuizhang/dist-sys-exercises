@@ -3,9 +3,11 @@
 #******************************************************************************
 #
 #  CS 6421 - Discovery Server
-#  Execution:    python simple.py portnum
+#  Execution:    python print.py portnum
 #
 #******************************************************************************
+
+
 
 import socket
 import sys
@@ -13,71 +15,30 @@ import sys
 
 
 #******************************************************************************
-#   Simple Server Class
+#   Print Server
 #******************************************************************************
-class SimpleServer(object):
+
+class PrintServer(object):
     def __init__(self):
-        self.BUFFER_SIZE = 1024
-        self.welcome = "Welcome to simple server. Please send the requests.\n"
+        self.welcome = "welcome to print server"
 
-    
-    #******************************************************************************
-    #   ADD function
-    #******************************************************************************
-    def add(self, userInputs):
-        print('add...')
-        res = 'set result'
 
-        return res
-    
-    #******************************************************************************
-    #   REMOVE function
-    #******************************************************************************
-    def remove(self, userInputs):
-        print('remove...')
-        res = 'remove...'
-        
-        return res
-    
-    #******************************************************************************
-    #   LOOKUP function
-    #******************************************************************************
-    def lookup(self, userInputs):
-        print('lookup...')
-        res = 'get result'
-        
-        return res
-    
     #******************************************************************************
     #   Function to process requests
     #******************************************************************************
     def process(self, conn):
-        conn.send(self.welcome)
-        # read userInput from client
-        userInput = conn.recv(self.BUFFER_SIZE)
-        print "Conversion Request from user: " + userInput.strip('\n')
+        # Read userInput from client
+        userInput = conn.recv(BUFFER_SIZE)
 
-        if not userInput:
-	        print "Error reading message\n" 
-                res = "Error reading message\n"
-                conn.send(res)
-                conn.close()
-                return
-
-        userInputs = userInput[:-1].split(' ')
-
-        if userInputs[0] == 'SET':
-            res = self.add(userInputs)
-        elif userInputs[0] == 'GET':
-            res = self.lookup(userInputs)
+        if userInput:
+            res = userInput
         else:
-            res = 'only SET and GET action allowed\n'
-
-        print "res to Client: " + res + '\n' 
-        conn.send(res)
+            res = "data compromised"
+        
+        print res
+        conn.send(res + '\n')
+        # Close connection
         conn.close()
-
-
 
 
 #******************************************************************************
@@ -85,9 +46,10 @@ class SimpleServer(object):
 #******************************************************************************
 if __name__ == "__main__":
     
+    
+    BUFFER_SIZE = 1024
     interface = ""
-    filename = 'path.txt'
-   
+
     # if input arguments are wrong, print out usage
     if len(sys.argv) != 2:
         print >> sys.stderr, "usage: python {0} portnum\n".format(sys.argv[0])
@@ -103,7 +65,7 @@ if __name__ == "__main__":
 
     # Server should be up and running and listening to the incoming connections
     while True:
-        print('Server is running. Port:' + str(portnum))
+        print 'Ready to serve...'
         # Set up a new connection from the client
         conn, addr = s.accept()
         # If an exception occurs during the execution of try clause
@@ -113,9 +75,9 @@ if __name__ == "__main__":
         try:
             # Receives the request message from the client
             print 'Accepted connection from client', addr
-            action = SimpleServer()
+            echo = PrintServer()
             # Process the connection
-            action.process(conn)
+            echo.process(conn)
         except KeyboardInterrupt:
             conn.close()
         except IOError:
@@ -123,7 +85,9 @@ if __name__ == "__main__":
             conn.close()
 
     # Close the Server connection socket
-    s.close()    
+    s.close()
+    
+    #TODO: add your unregister code here 
+
     # Exit
     sys.exit(0)
-
