@@ -9,9 +9,13 @@
 
 #How to Execute: 
 
-* Example 
-    - start server `python convServer.py 3334`
+* Example ConvServer and Proxy
+    - start server `python ConvServer.py 3334`
     - start server `java ConvServer 3336`
     - start server  ...
     - start proxy on port 1112  `python ProxyServer.py 1112`
     - request `telnet 127.0.0.1 1112`
+
+* Example print, store, simple are listed in file headers
+
+
