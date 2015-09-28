@@ -20,31 +20,51 @@ import sys
 #******************************************************************************
 class Register(object):
     def __init__(self):
-        self.reg_ip = clientsocket.getsockname()[0]
         # Discov Server
         self.discov_ip = "127.0.0.1"
         self.discov_portnum = 8888
+        self.unit1 = "b"
+        self.unit2 = "g"
+
     #******************************************************************************
     #   Register Request at Discov Server
     #******************************************************************************
     def register(self):
-        reg_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        reg_socket.connect((self.discov_ip, self.discov_portnum))
-        msg = "Logon\t" + self.reg_ip + ":" + str(portnum)
-        print msg
-        reg_socket.send(msg)
-        reg_socket.close()
+        # send discov msg when turned on
+        try:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.connect((self.discov_ip, self.discov_portnum))
+            self.msg = self.unit1 + ' ' + self.unit2 + ' ' + sock.getsockname()[0] + ' ' + sys.argv[1]
+            sock.send(self.msg)
+            print "registed"
+            sock.close()
+        except KeyboardInterrupt:
+            sock.close()
+            sys.exit(1)
+        except IOError:
+            # Close the client connection socket
+            sock.close()
+            sys.exit(1)
     
     #******************************************************************************
     #   Unregister Request at Discov Server
     #******************************************************************************
     def unregister(self):
-        unreg_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        unreg_socket.connect((self.discov_ip, self.discov_portnum))
-        msg = "Logoff\t" + self.reg_ip + ":" + str(portnum)
-        print msg
-        unreg_socket.send(msg)
-        unreg_socket.close()
+        # send discov msg when turned off
+        try:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.connect((self.discov_ip, self.discov_portnum))
+            sock.send(self.msg)
+            self.msg = self.unit1 + ' ' + self.unit2 + ' ' + sock.getsockname()[0] + ' ' + sys.argv[1]
+            print "unregisted"
+            sock.close()
+        except KeyboardInterrupt:
+            sock.close()
+            sys.exit(1)
+        except IOError:
+            # Close the client connection socket
+            sock.close()
+            sys.exit(1)
 
 
 
@@ -56,9 +76,9 @@ class Register(object):
 class ConvServer(object):
     def __init__(self):
         # Conv Server
-            self.unit1 = "b"
-	    self.unit2 = "g"
-	    self.index = 0.442
+        self.unit1 = "b"
+	self.unit2 = "g"
+	self.index = 0.442
 
     #******************************************************************************
     #   Convertion function
@@ -111,12 +131,16 @@ if __name__ == "__main__":
     else:
         portnum = int(sys.argv[1])
 
-    #TODO: add your register code here
 
     # create socket
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind((interface, portnum))
     s.listen(5)
+
+    #TODO: add your register code here
+
+    reg = Register()
+    reg.register()
 
     # Server should be up and running and listening to the incoming connections
     while True:
@@ -143,6 +167,7 @@ if __name__ == "__main__":
     s.close()
     
     #TODO: add your unregister code here 
+    reg.unregister()
 
     # Exit
     sys.exit(0)

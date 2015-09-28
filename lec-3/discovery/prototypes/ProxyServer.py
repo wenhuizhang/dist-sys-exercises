@@ -11,6 +11,63 @@ import socket
 import sys
 ##TODO: import your module here
 
+
+
+##TODO: implement your register class here
+#******************************************************************************
+#   Register Class
+#******************************************************************************
+class Register(object):
+    def __init__(self):
+        # Discov Server
+        self.discov_ip = "127.0.0.1"
+        self.discov_portnum = 8888
+        self.unit1 = "b"
+        self.unit2 = "g"
+    
+    #******************************************************************************
+    #   Register Request at Discov Server
+    #******************************************************************************
+    def register(self):
+        # send discov msg when turned on
+        try:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.connect((self.discov_ip, self.discov_portnum))
+            self.msg = self.unit1 + ' ' + self.unit2 + ' ' + sock.getsockname()[0] + ' ' + sys.argv[1]
+            sock.send(self.msg)
+            print "registed"
+            sock.close()
+        except KeyboardInterrupt:
+            sock.close()
+            sys.exit(1)
+        except IOError:
+            # Close the client connection socket
+            sock.close()
+            sys.exit(1)
+    
+    #******************************************************************************
+    #   Unregister Request at Discov Server
+    #******************************************************************************
+    def unregister(self):
+        # send discov msg when turned off
+        try:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.connect((self.discov_ip, self.discov_portnum))
+            sock.send(self.msg)
+            self.msg = self.unit1 + ' ' + self.unit2 + ' ' + sock.getsockname()[0] + ' ' + sys.argv[1]
+            print "unregisted"
+            sock.close()
+        except KeyboardInterrupt:
+            sock.close()
+            sys.exit(1)
+        except IOError:
+            # Close the client connection socket
+            sock.close()
+            sys.exit(1)
+
+
+
+
 ##TODO: implement your get convertion server list  class here
 #******************************************************************************
 #   GetList Class: get convertion service list from discovery server
@@ -108,6 +165,8 @@ if __name__ == "__main__":
     
     interface = ""
     filename = 'path.txt'
+    host = "127.0.0.1"
+    port = 8888
    
     # if input arguments are wrong, print out usage
     if len(sys.argv) != 2:
@@ -116,7 +175,10 @@ if __name__ == "__main__":
     else:
         portnum = int(sys.argv[1])
 
-    #TODO: implement your updating convertion server list here, write into 'path.txt', for temp test only  
+
+
+
+    #TODO: implement your updating convertion server list here, write into 'path.txt', for temp test only
     
     #TODO: one more step, implement serverTable without saving file locally      
 	
@@ -140,6 +202,10 @@ if __name__ == "__main__":
     s.bind((interface, portnum))
     s.listen(5)
 
+    # register
+    reg = Register()
+    reg.register()
+
     # Server should be up and running and listening to the incoming connections
     while True:
         print('Proxy is running. Port:' + str(portnum))
@@ -161,6 +227,7 @@ if __name__ == "__main__":
             # Close the client connection socket
             conn.close()
 
+    reg.unregister()
     # Close the Server connection socket
     s.close()
     
