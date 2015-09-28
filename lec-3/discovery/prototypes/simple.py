@@ -9,6 +9,7 @@
 
 import socket
 import sys
+import string
 ##TODO: import your module here
 
 
@@ -66,9 +67,9 @@ class SimpleServer(object):
 
         userInputs = userInput[:-1].split(' ')
 
-        if userInputs[0] == 'SET':
+        if userInputs[0].upper() == 'SET':
             res = self.add(userInputs)
-        elif userInputs[0] == 'GET':
+        elif userInputs[0].upper() == 'GET':
             res = self.lookup(userInputs)
         else:
             res = 'only SET and GET action allowed\n'
