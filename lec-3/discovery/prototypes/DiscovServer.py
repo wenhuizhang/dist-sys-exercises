@@ -68,9 +68,12 @@ class StoreServer(object):
             return res
         
         print('remove...')
-        del server_list[key]
-        res = 'SUCCESS'
-        
+        if (server_list.get(key) != None):
+            del server_list[key]
+            res = "SUCCESS\n"
+        else:
+            res = "FAILURE\n"
+
         return res
     
     #******************************************************************************
