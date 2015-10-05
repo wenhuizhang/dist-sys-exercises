@@ -39,21 +39,21 @@ class StoreServer(object):
         
         userInputIP = userInputs[2]
         if self.IdVerify(userInputIP, addr) == "Invalid":
-            print "Not Allowed"
-            res = "Not Allowed"
+            print "FAILURE:Not Allowed"
+            res = "FAILURE:Not Allowed"
             return res
         
         print('add...')
         print len(userInputs)
         if len(userInputs) != 4:
-            print "SET UNIT1 UNIT2 IP PORT\n"
-            res = "SET UNIT1 UNIT2 IP PORT\n"
+            print "FAILURE:SET UNIT1 UNIT2 IP PORT\n"
+            res = "FAILURE:SET UNIT1 UNIT2 IP PORT\n"
             return res
         key = userInputs[0].strip('\r') + ":" + userInputs[1].strip('\r')
         value = userInputs[2].strip('\r') + ":" + userInputs[3].strip('\r')
         server_list.update({key:value})
         print server_list
-        res = "SUCCESS"
+        res = "SUCCESS\n"
 
         return res
     
@@ -63,8 +63,8 @@ class StoreServer(object):
     def remove(self, key, addr):
         userInputIP = key[0]
         if self.IdVerify(userInputIP, addr) == "Invalid":
-            print "Not Allowed"
-            res = "Not Allowed"
+            print "FAILURE:Not Allowed\n"
+            res = "FAILURE:Not Allowed\n"
             return res
         
         print('remove...')
@@ -78,15 +78,16 @@ class StoreServer(object):
     #******************************************************************************
     def lookup(self, userInputs):
         if len(userInputs) > 3:
-            print "LOOKUP UNIT1 UNIT2\n"
-            res = "LOOKUP UNIT1 UNIT2\n"
+            print "FAILURE:LOOKUP UNIT1 UNIT2\n"
+            res = "FAILURE:LOOKUP UNIT1 UNIT2\n"
             return res
         key = userInputs[0].strip('\r') + ":" + userInputs[1].strip('\r')
         print key
         print('lookup...')
-        res = server_list[key]
-        if (res == None):
-            res = "None"
+        if (server_list.get(key) != None):
+            res = server_list[key]
+        else:
+            res = "FAILURE:None\n"
         return res
     
     #******************************************************************************
@@ -99,8 +100,8 @@ class StoreServer(object):
         print "Conversion Request from user: " + userInput.strip('\n')
 
         if not userInput:
-	        print "Error reading message\n" 
-                res = "Error reading message\n"
+	        print "FAILURE:Error reading message\n"
+                res = "FAILURE:Error reading message\n"
                 conn.send(res)
                 conn.close()
                 return
@@ -114,7 +115,7 @@ class StoreServer(object):
         elif userInputs[0].upper() == 'REMOVE':
             res = self.remove(userInputs[1:], addr)
         else:
-            res = 'only ADD and REMOVE action allowed\n'
+            res = 'FAILURE:only ADD, LOOKUP and REMOVE action allowed\n'
 
         print "res to Client: " + res + '\n' 
         conn.send(res + '\n')
