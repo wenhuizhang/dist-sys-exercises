@@ -49,7 +49,7 @@ class DiscovServer(object):
             print "FAILURE:SET UNIT1 UNIT2 IP PORT\n"
             res = "FAILURE:SET UNIT1 UNIT2 IP PORT\n"
             return res
-
+	value = set()
         key = userInputs[0].strip('\r') + ":" + userInputs[1].strip('\r')
         if (server_list.get(key) != None):
             value = server_list[key]
