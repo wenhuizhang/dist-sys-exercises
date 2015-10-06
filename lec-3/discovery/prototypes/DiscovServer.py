@@ -49,14 +49,22 @@ class StoreServer(object):
             print "FAILURE:SET UNIT1 UNIT2 IP PORT\n"
             res = "FAILURE:SET UNIT1 UNIT2 IP PORT\n"
             return res
-        
-        key = userInputs[0].strip('\r') + ":" + userInputs[1].strip('\r')
+
         value = set()
+        key = userInputs[0].strip('\r') + ":" + userInputs[1].strip('\r')
         if (server_list.get(key) != None):
             value = server_list[key]
-        
         value.add( userInputs[2].strip('\r') + ":" + userInputs[3].strip('\r') )
         server_list.update({key:value})
+        
+        
+        key = userInputs[1].strip('\r') + ":" + userInputs[0].strip('\r')
+        if (server_list.get(key) != None):
+            value = server_list[key]
+        value.add( userInputs[2].strip('\r') + ":" + userInputs[3].strip('\r') )
+        server_list.update({key:value})
+        
+        
         print server_list
         res = "SUCCESS\n"
 
@@ -75,16 +83,19 @@ class StoreServer(object):
         print('remove...')
         
         ip_port = userInputs[0].strip('\r') + ":" + userInputs[1].strip('\r')
-        value = set()
+
         for key in server_list:
             value = server_list[key]
             if ip_port in value:
                 value.remove(ip_port)
                 server_list.update({key:value})
                 res = "SUCCESS\n"
+                print server_list
                 return res
-            
+
+
         res = "FAILURE\n"
+                    
         return res
     
     #******************************************************************************
