@@ -20,7 +20,7 @@ import string
 class StoreServer(object):
     def __init__(self):
         self.BUFFER_SIZE = 1024
-        self.welcome = "Welcome to store server. Please send the requests.\n"
+        self.welcome = "Welcome to Discovery Server. Please send the requests.\n"
 
 
     #******************************************************************************
@@ -49,8 +49,13 @@ class StoreServer(object):
             print "FAILURE:SET UNIT1 UNIT2 IP PORT\n"
             res = "FAILURE:SET UNIT1 UNIT2 IP PORT\n"
             return res
+        
         key = userInputs[0].strip('\r') + ":" + userInputs[1].strip('\r')
-        value = userInputs[2].strip('\r') + ":" + userInputs[3].strip('\r')
+        value = set()
+        if (server_list.get(key) != None):
+            value = server_list[key]
+        
+        value.add( userInputs[2].strip('\r') + ":" + userInputs[3].strip('\r') )
         server_list.update({key:value})
         print server_list
         res = "SUCCESS\n"
@@ -60,20 +65,26 @@ class StoreServer(object):
     #******************************************************************************
     #   REMOVE function
     #******************************************************************************
-    def remove(self, key, addr):
-        userInputIP = key[0]
+    def remove(self, userInputs, addr):
+        userInputIP = userInputs[0]
         if self.IdVerify(userInputIP, addr) == "Invalid":
             print "FAILURE:Not Allowed\n"
             res = "FAILURE:Not Allowed\n"
             return res
         
         print('remove...')
-        if (server_list.get(key) != None):
-            del server_list[key]
-            res = "SUCCESS\n"
-        else:
-            res = "FAILURE\n"
-
+        
+        ip_port = userInputs[0].strip('\r') + ":" + userInputs[1].strip('\r')
+        value = set()
+        for key in server_list:
+            value = server_list[key]
+            if ip_port in value:
+                value.remove(ip_port)
+                server_list.update({key:value})
+                res = "SUCCESS\n"
+                return res
+            
+        res = "FAILURE\n"
         return res
     
     #******************************************************************************
@@ -88,7 +99,8 @@ class StoreServer(object):
         print key
         print('lookup...')
         if (server_list.get(key) != None):
-            res = server_list[key]
+            res = server_list[key].pop()
+            server_list[key].add(res)
         else:
             res = "FAILURE:None\n"
         return res
