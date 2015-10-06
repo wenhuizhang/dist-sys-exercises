@@ -15,9 +15,9 @@ import string
 
 
 #******************************************************************************
-#   Store Server Class
+#   Discov Server Class
 #******************************************************************************
-class StoreServer(object):
+class DiscovServer(object):
     def __init__(self):
         self.BUFFER_SIZE = 1024
         self.welcome = "Welcome to Discovery Server. Please send the requests.\n"
@@ -182,7 +182,7 @@ if __name__ == "__main__":
         try:
             # Receives the request message from the client
             print 'Accepted connection from client', addr
-            action = StoreServer()
+            action = DiscovServer()
             # Process the connection
             action.process(conn, addr[0])
         except KeyboardInterrupt:
