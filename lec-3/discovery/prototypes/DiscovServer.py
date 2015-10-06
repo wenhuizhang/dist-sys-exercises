@@ -112,7 +112,7 @@ class DiscovServer(object):
             res = server_list[key].pop()
             server_list[key].add(res)
         else:
-            res = "FAILURE:None\n"
+            res = "none\n"
         return res
     
     #******************************************************************************
