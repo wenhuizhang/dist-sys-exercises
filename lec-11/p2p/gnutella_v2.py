@@ -3,7 +3,7 @@
 #******************************************************************************
 #
 #  CS 6421 - Gnutella
-#  Execution:    python gnutella_v2.py leaf leaf_neighbors
+#  Execution:  python gnutella_v2.py leaf leaf_neighbors ultra ultra_neighbors
 #
 #******************************************************************************
 
@@ -37,22 +37,19 @@ if __name__ == "__main__":
 
     # init dict
     vert_list = dict()
-    ultra_list = dict()
-
-    for key in xrange(ultra):
-        ultra_list[key+1] = set()
-        for edge in xrange(ultra_neighbors):
-            ultra_list[key+1].add(randint(1, leaf))
 
 
     for key in xrange(leaf):
         vert_list[key+1] = set()
         for edge in xrange(leaf_neighbors):
-            vert_list[key+1].update(ultra_list[randint(1,ultra)])
+            vert_list[key+1].add(randint(1,leaf))
+
+    for key in xrange(ultra):
+	rand = randint(1,leaf)
+        for edge in xrange(ultra_neighbors):
+            vert_list[rand].update(vert_list[randint(1, leaf)])
 
 
-
-    
 
     file = open("gnutella2.js", 'w')
     file.write("var adjacencyList = {")
@@ -62,7 +59,6 @@ if __name__ == "__main__":
         file.write("\n")
     file.write( "};")
     file.close()
-
 
 
 
