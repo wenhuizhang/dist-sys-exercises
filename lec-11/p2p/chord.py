@@ -41,7 +41,7 @@ if __name__ == "__main__":
     for key in xrange(vertices):
         vert_list[key+1] = set()
         for edge in xrange(entries):
-            vert_list[key+1].add((key + 1 + pow(2,edge))%vertices)
+            vert_list[key+1].add((key + pow(2,edge))%vertices + 1)
 
     file = open("chord.js", 'w')
     file.write( "var adjacencyList = {")
